@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.sesoc.teamBOB4.dao.CustomerMapper">
+
+	<select id="searchpf" parameterType="String" resultType="Customer">
+		select *
+		from customer
+		where
+		cust_nickname like '%'||#{search}||'%'
+	</select>
+	
+	<select id="get_cust_number_by_nickname" parameterType="String" resultType="int">
+	 (select NVL(max(cust_number),0)  from Customer
+	where cust_nickname =#{cust_nickname}) 
+	
+	</select>
+
+	<insert id="following" parameterType="Follow">
+		insert into Follow
+		(
+		FOL_NUMBER
+		,FOLLOWER_NUMBER
+		,FOLLOW_NUMBER
+		)
+		values
+		(
+		SEQ_Follow_fol_number.nextval
+		,#{follower_number}
+		,#{follow_number}
+		)
+
+	</insert>
+
+<update id="GetKey" parameterType="Map">
+update Customer set cust_key = #{cust_key} where cust_id =#{cust_id}
+
+</update>
+<update id="alter_userKey" parameterType="Map">
+	update Customer set cust_key ='Y' where cust_id =#{param1} and cust_key =#{param2}
+</update>
+
+	<select id="checkfollow" parameterType="Follow" resultType="int">
+		select count(*)
+		from Follow
+		where
+		FOLLOWER_NUMBER=#{follower_number}
+		and
+		FOLLOW_NUMBER =#{follow_number}
+
+
+	</select>
+	<select id="getDataFromDBsendData" parameterType="string" resultType="Customer">
+		select *
+		from Customer
+		where
+		cust_nickname =#{sendData}
+	</select>
+	<delete id="unfollowing" parameterType="Follow">
+		delete from Follow
+		where
+		FOLLOWER_NUMBER=#{follower_number}
+		and
+		FOLLOW_NUMBER =#{follow_number}
+
+	</delete>
+
+	<select id="getFollowers" parameterType="int" resultType="int">
+
+ (select NVL(max(FOLLOWER_NUMBER),0)  from Follow
+	where FOLLOW_NUMBER =#{FOLLOW_NUMBER}) 
+
+	</select>
+		<select id="getFollowings" parameterType="int" resultType="int">
+		select
+		FOLLOW_NUMBER
+		from Follow
+		where
+		FOLLOWER_NUMBER =#{cust_number}
+
+
+	</select>
+	<select id="searchOne" parameterType="Customer"
+		resultType="Customer">
+		select *
+		from Customer
+		where
+		cust_number =#{cust_number}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="signup" parameterType="Customer">
+		insert into customer(
+			cust_number,
+			cust_id,
+			cust_password,
+			cust_email,
+			cust_nickname
+			<if test="cust_photo_original != null">
+			,
+			cust_photo_original,
+			cust_photo_saved
+			</if>
+			<if test="cust_introduce != null">
+			,
+			cust_introduce
+			</if>
+		)values(
+		seq_customer_cust_number.nextval,
+			#{cust_id},
+			#{cust_password},
+			#{cust_email},
+			#{cust_nickname}
+			<if test="cust_photo_original != null">
+			,
+			#{cust_photo_original},
+			#{cust_photo_saved}
+			</if>
+			<if test="cust_introduce != null">
+			,
+			#{cust_introduce}
+			</if>
+		)
+	</insert>
+	<select id="selectOne" parameterType="Customer" resultType="Customer">
+		select * from customer where cust_id=#{cust_id} 
+		<if test="cust_password != null">
+		and cust_password=#{cust_password}
+		</if>
+	</select>
+	<select id="getNumber" parameterType="int" resultType="Customer">
+		select * from customer where cust_number=#{cust_number}
+	</select>
+	<select id="getNumber1" parameterType="int" resultType="Customer">
+		select * from customer where cust_number=#{cust_number}
+	</select>
+	<select id="selectEmail" parameterType="Customer" resultType="Customer">
+		select * from customer where
+		 cust_email = #{cust_email}
+	</select>
+	
+	<select id="getAllList"  resultType="Customer">
+		select * from customer
+		
+	</select>
+	<select id="searchOne_ByCustnumber_getProfile" parameterType="int"
+		resultType="Customer">
+		select cust_number,cust_nickname,cust_photo_saved
+		from Customer
+		where
+		cust_number =#{cust_number}
+	</select>
+	<delete id="deleteCustomer" parameterType="Customer">
+		delete from customer where
+		cust_password = #{cust_password} 
+	</delete>
+	<update id="updateCustomer" parameterType="Customer">
+		update customer set 
+			cust_nickname = #{cust_nickname},
+			cust_introduce = #{cust_introduce}
+			<if test="cust_photo_original != null">
+			,
+			cust_photo_original = #{cust_photo_original},
+			cust_photo_saved = #{cust_photo_saved}
+			</if>
+			where cust_id = #{cust_id}
+	</update>
+	<update id="changePwd" parameterType="Customer">
+		update customer set
+			cust_password = #{cust_password}
+			where cust_id = #{cust_id}
+	</update>
+	<select id="searchList" parameterType="Customer" resultType="Customer">
+		select cust_id from customer
+	</select>
+</mapper>

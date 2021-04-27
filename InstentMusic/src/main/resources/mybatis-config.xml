@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Customer" alias="Customer"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Follow" alias="Follow"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Post" alias="Post"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Message" alias="Message"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.MessageList" alias="MessageList"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Tag" alias="Tag"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Sound_library" alias="Sound"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Post_tag" alias="Post_tag"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Reply" alias="Reply"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Key_sound" alias="Keys"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Temp" alias="Temp"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Part_music" alias="Parts"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.SearchWord" alias="Word"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Notification2" alias="Notification"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Music_library" alias="Music"/>
+		<typeAlias type="global.sesoc.teamBOB4.vo.Like_click" alias="Like_click"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/customerMapper.xml" />
+		<mapper resource="mapper/postMapper.xml" />
+		<mapper resource="mapper/MessageMapper.xml" />
+		<mapper resource="mapper/chatMapper.xml" />
+		<mapper resource="mapper/tagMapper.xml" />
+		<mapper resource="mapper/musicMapper.xml" />
+		<mapper resource="mapper/post_tagMapper.xml" />
+		<mapper resource="mapper/replyMapper.xml" />
+		<mapper resource="mapper/makeMapper.xml" />
+		<mapper resource="mapper/notiMapper.xml" />
+		<mapper resource="mapper/listMapper.xml" />
+	</mappers>
+</configuration>

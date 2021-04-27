@@ -1,0 +1,15 @@
+#soundlib {
+	margin-top: 25px;
+	margin-left: 1%;
+	padding: 5px 5px 5px 5px;
+	width: 1020px;
+	height: 220px;
+	border: 1px solid black;
+}
+#SL, #KB{
+	font-style:italic;
+	font-family: "Times New Roman", Times, serif;
+}
+#makingmusic{
+	font-size: inherit;
+}
